@@ -1,4 +1,8 @@
 Securesign::Application.routes.draw do
+  root to: 'info#index'
+  
+  get "info/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Securesign</title>
+  <title><%= content_for?(:title) ? yield(:title) : "SecureSign" %></title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+	<%= yield(:head) %>
 </head>
-<body>
 
-<%= yield %>
+<body class="<%= params[:controller] %>">
+	
+	<div id="container">
+		
+		<div id="header">
+			<div id="account-links">
+			</div>
+			
+			<div id="logo">
+        <a href='/'><span>Secure</span>Sign</a>
+      </div>
+		</div>
+		
+		<div id="content-container">
+			<% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+      <%= content_tag :h3, yield(:title), :id => 'page-title' if show_title? %>
+      <%= yield %>
+      
+      <%= debug(params) if Rails.env.development? %>
+		</div>
+	</div>
 
 </body>
 </html>
