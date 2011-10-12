@@ -1,0 +1,107 @@
+// Fonts
+$serif: 'Georgia', 'Times New Roman', times, serif;
+$sans-serif: "Lucida Grande", Verdana, Arial, Helvetica, freesans, sans-serif;
+$helvetica: "Helvetica Neue", Helvetica, Arial, freesans;
+
+// Font colors
+$dark-text: #333333;
+$medium-text: #666666;
+$light-text: #999999;
+$link-color: #3b5998;
+
+// Boxes
+$grey-box: #f7f7f7;
+$grey-border: #cccccc;
+$blue-box: #eceff6;
+$blue-border: #d4dae8;
+$info-box: #fff9d7;
+$info-border: #e2c822;
+$error-box: #ffebe8;
+$error-border: #dd3c10;
+
+// Colors
+$green: #195D00;
+$light-blue: #3185C5;
+$blue: #3b5998;
+
+
+
+////////////
+// Mixins //
+////////////
+
+@mixin rounded-corners($top: 10px, $right: $top, $bottom: $top, $left: $top) {
+  border-radius: $top $right $bottom $left;
+  -moz-border-radius: $top $right $bottom $left;
+  -webkit-border-radius: $top $right $bottom $left;
+}
+
+// @include box-shadow(5px 5px 6px #bbb);
+@mixin box-shadow($params) {
+	-moz-box-shadow: $params;
+	-webkit-box-shadow: $params;
+	box-shadow: $params;
+}
+
+@mixin ptext ($font-size: 10pt, $font-family: $sans-serif) {
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	line-height: 19px;
+	color: black;
+	text-align: left;
+	font-size: $font-size;
+	font-family: $font-family;
+}
+
+@mixin textarea {
+	-webkit-appearance: textarea;
+	background-color: white;
+	border: 1px solid;
+	-webkit-rtl-ordering: logical;
+	-webkit-user-select: text;
+	-webkit-box-orient: vertical;
+	resize: auto;
+	cursor: auto;
+	padding: 2px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	color: initial;
+	letter-spacing: normal;
+	word-spacing: normal;
+	line-height: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: -webkit-auto;
+}
+
+
+
+/////////////
+// Classes //
+/////////////
+
+.left {
+	float: left;
+	display: inline;
+}
+
+.right {
+	float: right;
+	display: inline;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+.border {
+	border-top: 4px double #bbb;
+	margin: 15px auto 7px auto;
+}
