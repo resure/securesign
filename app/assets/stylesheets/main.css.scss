@@ -40,8 +40,11 @@ code {
 }
 
 input, select, textarea {
-	border: 1px solid #adc2d6;
 	font: 1em Arial, Helvetica, sans-serif;
+}
+
+.field {
+	margin-bottom: 15px;
 }
 
 table {
@@ -97,18 +100,34 @@ table td {
 	border-bottom: 5px solid #2e567e;
 }
 #content-container {
-	#page-title {
-		margin-bottom: 20px;
-	}
+	#page-title { margin-bottom: 20px }
 	width: 750px;
 	margin: 0.5em auto;
 	line-height: 1.5;
 }
 
 #account-links {
+	font-size: 9pt;
 	float: right;
 	text-align: right;
 	a, a:visited {
 		color: #084482;
 	}
+}
+
+#flash_notice, #flash_alert {
+	margin: 5px auto 10px auto;
+	padding: 3px;
+	text-align: center;
+	border: 1px solid #fff;
+}
+
+#flash_notice {
+	background-color: #ecf6ef;
+	border-color: #d4e8da;
+}
+
+#flash_alert {
+	background-color: #ffebe8;
+	border-color: #dd3c10;
 }
