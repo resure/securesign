@@ -8,6 +8,8 @@ gem 'rails', '3.1.1'
 gem 'pg'
 gem 'rack', '1.3.3'
 
+gem 'awesome_print'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -25,6 +27,10 @@ group :test do
   gem 'guard-rspec'
   gem 'spork', '> 0.9.0.rc'
   gem 'guard-spork'
+end
+
+group :development do
+  gem 'launchy'
 end
 
 # To use ActiveModel has_secure_password
