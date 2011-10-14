@@ -5,17 +5,15 @@ class User < ActiveRecord::Base
   
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name
   
-  validates :email, length: { within: 5..254 },
-                    uniqueness: { case_sensitive: false },
+  validates :email, uniqueness: { case_sensitive: false },
                     email: true
-  validates :first_name, :last_name,  presence: true, 
-                                      length: { within: 3..50 },
+  validates :first_name, :last_name,  length: { within: 3..50 },
                                       format: /^[\wа-яА-Я\d\s\-]+$/
-  validates :password, confirmation: true, presence: { on: :create }
+  validates :password, confirmation: true, presence: { on: :create }, if: :password
   
   before_validation :prepare_values
-  
-  
+    
+    
   private
   
   def prepare_values
