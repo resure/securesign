@@ -5,7 +5,7 @@ body {
 }
 
 a {
-	color: #088244;
+	color: #084482;
 	img { border: 0 }
 }
 
@@ -33,6 +33,10 @@ h4 {
 
 h5, h6 {
 	font-size: 1em;
+	margin-top: 10px;
+	margin-bottom: 2px;
+	padding-top: 5px;
+	padding-bottom: 0px;
 }
 
 code {
@@ -123,8 +127,8 @@ table td {
 }
 
 #flash_notice {
-	background-color: #ecf6ef;
-	border-color: #d4e8da;
+	background-color: #eceff6;
+	border-color: #d4dae8;
 }
 
 #flash_alert {
@@ -137,4 +141,50 @@ table td {
 	input {
 		border: 2px #b00 solid;
 	}
+}
+
+.danger-zone {
+	background-color: #fff9d7;
+	border: 2px dashed #e2c822;
+	padding: 10px;
+	width: 500px;
+}
+
+.actions {
+	margin-top: 15px;
+}
+
+.danger-link {
+	font-size: 9pt;
+	color: #a00;
+}
+
+#profile {
+}
+
+#page-tools {
+	font-size: 9pt;
+	margin-top: 15px;
+	vertical-align: center;
+}
+
+.left {
+	float: left;
+	display: inline;
+}
+
+.right {
+	float: right;
+	display: inline;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+.border {
+	border-top: 4px double #bbb;
+	margin: 15px auto 7px auto;
 }

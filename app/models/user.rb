@@ -13,6 +13,13 @@ class User < ActiveRecord::Base
   
   before_validation :prepare_values
   
+  def admin?
+    admin
+  end
+  
+  def blocked?
+    block
+  end
   
   private
   

@@ -1,0 +1,12 @@
+<% title 'Users listing' %>
+
+<% @users.each do |user| %>
+  <div class="left">
+    <%= "#{user.first_name} #{user.last_name} (#{user.email})" %>
+  </div>
+  <div class="right">
+    <%= link_to "Show", user %>
+    <%= link_to "Edit", edit_user_path(user) %>
+  </div>
+  <div class="clear"></div>
+<% end %>

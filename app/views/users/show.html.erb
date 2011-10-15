@@ -1,0 +1,18 @@
+<% if @user == current_user %>
+  <% title 'Your profile' %>
+<% else %>
+  <% title "#{@user.first_name}'s profile" %>
+<% end %>
+
+<div id="profile">
+  <strong>First name:</strong> <%=  @user.first_name %><br>
+  <strong>Last name:</strong> <%= @user.last_name %><br>
+  <strong>Email:</strong> <%= @user.email %><br>
+</div>
+
+<div id="page-tools">
+  <%= link_to 'Edit profile', edit_user_path(@user) %>
+  <%= link_to 'Delete user', @user, method: :destroy, confirm: 'Are you sure?', class: 'danger-link' if current_user.admin? %>
+  <br />
+  <%= link_to "Back to user list", users_path if current_user.admin? %>
+</div>

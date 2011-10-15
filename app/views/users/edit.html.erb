@@ -1,0 +1,70 @@
+<% if @user == current_user %>
+  <% title 'Editing your profile' %>
+<% else %>
+  <% title "Editing #{@user.first_name}'s profile" %>
+<% end %>
+
+<%= form_for(@user) do |f| %>
+  <%= error_messages_for(@user) %>
+  
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  
+  
+  <div class="danger-zone">
+    <h4>Danger zone</h4>
+    
+    <% if current_user.admin? %>
+      <div class="field">
+        <%= f.check_box :admin %>
+        <%= f.label :admin %>
+      </div>
+
+      <div class="field">
+        <%= f.check_box :block %>
+        <%= f.label :block %>
+      </div>
+    <% end %>
+    
+    <p>
+  		<h5>Password changing</h5>
+  		Leave this fields blank, if you don't want to change password
+		</p>
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    
+    <% unless current_user.admin? %>
+      <div class="field">
+        <%= f.label :old_password %><br>
+        <%= f.password_field :old_password %>
+      </div>
+    <% end %>
+  </div>
+  
+  
+  <div class="actions">
+    <%= f.submit "Update profile" %>
+  </div>
+  
+  <%= link_to "Back to profile", @user %>
+
+<% end %>
