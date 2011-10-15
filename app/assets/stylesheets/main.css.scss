@@ -131,3 +131,10 @@ table td {
 	background-color: #ffebe8;
 	border-color: #dd3c10;
 }
+
+.field_with_errors {
+	display: inline;
+	input {
+		border: 2px #b00 solid;
+	}
+}

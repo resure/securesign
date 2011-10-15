@@ -35,10 +35,9 @@ describe "Users" do
       page.should have_content("Sign Up")
       
       click_on "Sign Up"
-      
       page.should have_content("Email is invalid")
-      page.should have_content("First name is too short")
-      page.should have_content("Last name is too short")
+      page.should have_content("First name is invalid")
+      page.should have_content("Last name is invalid")
       
       fill_in "Email", with: @attr[:email]
       fill_in "First name", with: @attr[:first_name]
@@ -59,36 +58,60 @@ describe "Users" do
       page.should have_content("Signed up!")
     end
   end
-  
+
   describe "Authentication" do
-    it "Authorize with correct password" do
-      user = Factory(:user)
+    it "Authorize with correct password", focus: true do
+      @attr = {
+        email: 'test@securesignhq.dev',
+        password: 'secret',
+        password_confirmation: 'secret',
+        first_name: 'Foo',
+        last_name: 'Bar'
+      }      
+      
+      User.destroy_all
+      user = User.create!(@attr)
+      
       visit login_path
       page.should have_content("Log in")
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
-      click_on "Log in"
-      # page.should have_content("Logged in!")
+      fill_in "Email", with: @attr[:email]
+      fill_in "Password", with: @attr[:password]
+      click_button "Log in"
+      page.should have_content("Welcome back, #{@attr[:first_name]}")
+    end
+    
+    it "reject without correct password or email", focus: true do
+      @attr = {
+        email: 'test@securesignhq.dev',
+        password: 'secret',
+        password_confirmation: 'secret',
+        first_name: 'Foo',
+        last_name: 'Bar'
+      }
       
-      # save_and_open_page
-      # page.should have_content("Email or password was invalid")
+      User.destroy_all
+      user = User.create!(@attr)
       
-      # fill_in "Email", with: user.email
-      # fill_in "Password", with: 'qwerty'
-      # click_on "Log in"
-      # 
-      # save_and_open_page
-      # 
-      # page.should have_content("Email or password was invalid")
-      # fill_in "Email", with: user.email
-      # click_on "Log in"
-      # page.should have_content("Email or password was invalid")
-      # fill_in "Password", with: 'qwerty'
-      # click_on "Log in"
-      # page.should have_content("Email or password was invalid")
-      # fill_in "Password", with: user.password
-      # click_on "Log in"
-      # page.should have_content("Logged in!")
+      visit login_path
+      page.should have_content("Log in")
+      
+      click_button "Log in"
+      page.should have_content("Email or password was invalid")
+      
+      fill_in "Email", with: @attr[:email]
+      fill_in "Password", with: 'qwerty'
+      click_button "Log in"
+      
+      page.should have_content("Email or password was invalid")
+      fill_in "Email", with: @attr[:email]
+      click_button "Log in"
+      page.should have_content("Email or password was invalid")
+      fill_in "Password", with: 'qwerty'
+      click_button "Log in"
+      page.should have_content("Email or password was invalid")
+      fill_in "Password", with: @attr[:password]
+      click_button "Log in"
+      page.should have_content("Welcome back, #{@attr[:first_name]}")
     end
   end
 end

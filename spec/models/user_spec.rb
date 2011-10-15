@@ -17,7 +17,7 @@ describe User do
     user = User.last
     user.email.should eq(@attr[:email])
     user.first_name.should eq(@attr[:first_name])
-    User.authenticate(@attr[:email], @attr[:password]).should be_true
+    user.authenticate(@attr[:password]).should be_true
   end
   
   it "should reject with invalid info" do

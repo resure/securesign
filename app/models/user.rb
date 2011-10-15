@@ -1,17 +1,15 @@
 # encoding: utf-8
 
 class User < ActiveRecord::Base
-  authenticates_with_sorcery!
+  has_secure_password
   
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name
   
-  validates :email, length: { within: 5..254 },
-                    uniqueness: { case_sensitive: false },
+  validates :email, uniqueness: { case_sensitive: false },
                     email: true
-  validates :first_name, :last_name,  presence: true, 
-                                      length: { within: 3..50 },
-                                      format: /^[\wа-яА-Я\d\s\-]+$/
-  validates :password, confirmation: true, presence: { on: :create }
+  validates :first_name, :last_name, format: /^[\wа-яА-Я\d\s\-]+$/
+  validates :password,  length: { :within => 6..254, :on => :create },
+                        if: :password_digest_changed?
   
   before_validation :prepare_values
   
