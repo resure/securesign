@@ -11,8 +11,8 @@
 </div>
 
 <div id="page-tools">
-  <%= link_to 'Edit profile', edit_user_path(@user) %>
+  <%= link_to 'Edit profile', edit_user_path(@user) if can? :update, User %>
   <%= link_to 'Delete user', @user, method: :destroy, confirm: 'Are you sure?', class: 'danger-link' if current_user.admin? %>
   <br />
-  <%= link_to "Back to user list", users_path if current_user.admin? %>
+  <%= link_to "Back to user list", users_path if can? :access, User %>
 </div>
