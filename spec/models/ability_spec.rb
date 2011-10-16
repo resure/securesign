@@ -8,8 +8,8 @@ describe "Ability" do
     end
     
     it "can inly view and create users" do      
-      @ability.should be_able_to(:login, :users)
-      @ability.should be_able_to(:create, :users)
+      @ability.should be_able_to(:login, User)
+      @ability.should be_able_to(:create, User)
     end
     
     it "can access any info pages" do
@@ -52,7 +52,7 @@ describe "Ability" do
       user.update_attribute(:admin, true)
       ability = Ability.new(user)
       ability.should be_able_to(:access, :all)
-      ability.should be_able_to(:update, :users)
+      ability.should be_able_to(:update, User)
     end
   end
 end

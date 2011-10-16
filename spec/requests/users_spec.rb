@@ -19,7 +19,7 @@ describe "Users" do
   before(:each) do
     User.destroy_all
   end
-  
+
   describe "registration" do
     
     before(:each) do
