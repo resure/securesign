@@ -1,0 +1,32 @@
+<% title 'Editing key' %>
+
+<%= form_for(@key) do |f| %>
+  <%= error_messages_for @key %>
+
+  <div class="title-form field">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'title-form' %>
+  </div>
+  <div class='danger-zone'>
+    <h5>Changing key's password</h5>
+    Leave this fields blank if you don't want to update password.
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="field">
+      <%= f.label :old_password %><br>
+      <%= f.password_field :old_password %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Update key', class: 'primary button' %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @key %> |
+<%= link_to 'Back', keys_path %>

@@ -28,7 +28,6 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    # TODO: check permissions
     
     if @user.update_attributes(params[:user].merge(password: nil, password_confirmation: nil))
       if current_user.admin? && @user != current_user
@@ -61,7 +60,6 @@ class UsersController < ApplicationController
   
   def destroy
     @user = User.find(params[:id])
-    # TODO: check permissions
     redirect_to users_path, alert: 'You can\'t delete yourself.' if @user == current_user
     @user.destroy
     redirect_to users_path

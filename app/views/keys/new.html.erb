@@ -1,0 +1,25 @@
+<% title 'New key' %>
+
+<%= form_for(@key) do |f| %>
+  <%= error_messages_for @key %>
+
+  <div id="medium-form">
+    <div class="title-form field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title, class: 'title-form', autofocus: true %>
+    </div>
+    <div class="field">  
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>  
+    </div>
+    <div class="actions">
+      <%= f.submit 'Generate key', class: 'primary button', id: 'create_key' %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'Back to the key list', keys_path %>

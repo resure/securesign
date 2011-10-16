@@ -1,0 +1,19 @@
+<% title 'Listing your keys' %>
+
+<% @keys.each do |key| %>
+  <div class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <div class="left">
+      <strong><%= key.title %></strong>
+    </div>
+    <div class="right">
+      <%= link_to 'Show', key %>
+      <%= link_to 'Edit', edit_key_path(key) %>
+      <%= link_to 'Destroy', key, confirm: 'Are you sure?', method: :delete %>
+    </div>
+    <div class="clear"></div>
+  </div>
+<% end %>
+
+<div id="page-tools">
+  <%= link_to 'New Key', new_key_path, id: 'new_key_link' %>
+</div>

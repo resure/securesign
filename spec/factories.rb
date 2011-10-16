@@ -5,3 +5,9 @@ Factory.define :user do |f|
   f.password 'secret'
   f.password_confirmation 'secret'
 end
+
+Factory.define :key do |f|
+  f.sequence(:title) { |n| "Test Key ##{n}" }
+  f.password 'secret'
+  f.password_confirmation 'secret'
+end

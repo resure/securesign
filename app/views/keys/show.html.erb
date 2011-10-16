@@ -1,0 +1,30 @@
+<% title 'Keys &rarr; '.html_safe + @key.title %>
+
+<% if @key_password %>
+  <div id="password-div">
+    Remember this password, we will not store it.<br />
+    <span><%= @key_password %></span>
+  </div>
+<% end %>
+
+<% if @key.user_id != current_user.id %>
+  <div>
+    <strong>WARNING: this key isn't yours.</strong>
+  </div>
+<% end %>
+
+<p>
+	<strong>Digest:</strong>
+	<input type="text" style="width:275px" value="<%= @key.digest %>" />
+</p>
+
+<pre>
+<%= @key.body %>
+</pre>
+
+<pre>
+<%= @key.public_body %>
+</pre>
+
+<%= link_to 'Edit', edit_key_path(@key) %> |
+<%= link_to 'Back', keys_path %>

@@ -26,6 +26,12 @@ describe "Ability" do
       ability.should be_able_to(:update, user)
       ability.should_not be_able_to(:update, User.new)
       ability.should_not be_able_to(:block, :users)
+      
+      ability.should_not be_able_to(:access, :keys)
+      ability.should_not be_able_to(:create, :keys)
+      ability.should_not be_able_to(:read, :keys, id: user.id)
+      ability.should_not be_able_to(:update, :keys, id: user.id)
+      ability.should_not be_able_to(:destroy, :keys, id: user.id)
     end
   end
   
@@ -53,6 +59,12 @@ describe "Ability" do
       ability = Ability.new(user)
       ability.should be_able_to(:access, :all)
       ability.should be_able_to(:update, User)
+      ability.should be_able_to(:destroy, User)
+      ability.should be_able_to(:block, User)
+      
+      ability.should be_able_to(:read, :keys)
+      ability.should be_able_to(:update, :keys)
+      ability.should be_able_to(:destroy, :keys)
     end
   end
 end

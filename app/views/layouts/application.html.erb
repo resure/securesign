@@ -24,9 +24,19 @@
 				<% end %>
 			</div>
 			
-			<div id="logo">
+			<div class="clear"></div>
+			
+			<div id="logo" class="left">
         <a href='/'><span>Secure</span>Sign</a>
       </div>
+      
+      <div id="navigation" class="right">
+        <% if current_user %>
+          <%= link_to "Keys", keys_path %>
+        <% end %>
+      </div>
+      
+      <div class="clear"></div>
 		</div>
 		
 		<div id="content-container">

@@ -1,6 +1,6 @@
 body {
 	background: #fff;
-	font-size: 11pt;
+	font-size: 10pt;
 	font-family: Verdana, Arial, Helvetica, freesans, sans-serif;
 }
 
@@ -103,6 +103,11 @@ table td {
 	}
 	border-bottom: 5px solid #2e567e;
 }
+
+#navigation {
+	margin: 2em 0.5em auto auto;
+}
+
 #content-container {
 	#page-title { margin-bottom: 20px }
 	width: 750px;
@@ -187,4 +192,15 @@ table td {
 .border {
 	border-top: 4px double #bbb;
 	margin: 15px auto 7px auto;
+}
+
+.list-line-odd, .list-line-even {
+	padding: 5px;
+}
+
+.list-line-odd {
+}
+
+.list-line-even {
+	background: #eceff6;
 }
