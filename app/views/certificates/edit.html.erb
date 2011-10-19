@@ -1,0 +1,18 @@
+<% title 'Editing certificate' %>
+
+<%= form_for(@certificate) do |f| %>
+  <%= error_messages_for @certificate %>
+
+  <div id="medium-form">
+    <div class="title-form field">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'title-form' %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'Update certificate' %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @certificate %> |
+<%= link_to 'Back', certificates_path %>

@@ -1,0 +1,68 @@
+<% title "Signing '#{@request.title}' by '#{@certificate.title}'" %>
+
+<p>
+	<pre><%= @request.body %></pre>
+</p>
+
+<% unless @request.common_name.blank? %>
+	<p>
+	  <b>Common name:</b>
+	  <%= @request.common_name %>
+	</p>
+<% end %>
+
+<% unless @request.organization.blank? %>
+	<p>
+	  <b>Organization:</b>
+	  <%= @request.organization %>
+	</p>
+<% end %>
+
+<% unless @request.organization_unit.blank? %>
+	<p>
+	  <b>Organization unit:</b>
+	  <%= @request.organization_unit %>
+	</p>
+<% end %>
+
+<% unless @request.country.blank? %>
+	<p>
+	  <b>Country:</b>
+	  <%= @request.country %>
+	</p>
+<% end %>
+
+<% unless @request.state.blank? %>
+	<p>
+	  <b>State:</b>
+	  <%= @request.state %>
+	</p>
+<% end %>
+
+<p>
+  <b>Days:</b>
+  <%= @request.days %>
+</p>
+
+<% unless @request.locality.blank? %>
+	<p>
+	  <b>Locality:</b>
+	  <%= @request.locality %>
+	</p>
+<% end %>
+
+<p>
+  <b>Email:</b>
+  <%= @request.email %>
+</p>
+
+<%= form_tag do |f| %>
+  <div id="medium-form">
+	  <div class='grey-box'>
+	    Key password:
+	    <%= password_field_tag :key_password, id: 'key_password' %><br />
+			Create CA: <%= check_box_tag :create_ca %>
+	    <%= submit_tag 'Sign', class: 'primary button' %>
+	  </div>
+	</div>
+<% end %>

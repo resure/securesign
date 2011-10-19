@@ -1,0 +1,104 @@
+<% title 'Certificates &rarr; '.html_safe + @certificate.title %>
+
+<% if @certificate.user_id != current_user.id %>
+  <div>
+    <strong>WARNING: this certificate isn't yours.</strong>
+  </div>
+<% end %>
+
+<% if @certificate.certificate_id == 0 %>
+	<div>
+		<strong style='font-style:italic; font-size:11pt'>Root Certificate</strong>
+    <br />
+    <%= link_to "Requests list", certificate_requests_path(@certificate) %>
+    <%= link_to "Issued certificates", issued_certificates_path(@certificate) %>
+	</div>
+<% else %>
+	<div>
+		<% if @certificate.request_status == 3 %>
+			<em>Issued by <%= link_to @certificate.issued_by.common_name, @certificate.issued_by %></em>
+		<% else %>
+			<em>Waiting approving from <%= link_to @certificate.issued_by.common_name, @certificate.issued_by %></em>
+		<% end %>
+		<br />
+		<% if @certificate.request_status == 2 && @certificate.issued_by.user_id == current_user.id %>
+			<%= link_to "Sign this request", show_request_url(id: @certificate.issued_by.id, request_id: @certificate.id) %> |
+			<%= link_to "Delete this request", @certificate, confirm: 'Are you sure?', method: :delete %>
+		<% end %>
+	</div>
+<% end %>
+
+<p>
+	<%= "<strong>CA certificate</strong>".html_safe if @certificate.ca? %>
+</p>
+
+<% if @certificate.user_id == current_user.id %>
+	<p>
+	  <b>Key ID:</b>
+	  <%= link_to @certificate.key_id, key_path(@certificate.key_id) %>
+	</p>
+<% end %>
+
+<p>
+	<strong>Digest:</strong>
+	<input type="text" style="width:275px" value="<%= @certificate.digest %>" />
+</p>
+
+<p>
+	<pre><%= @certificate.body %></pre>
+</p>
+
+<% unless @certificate.common_name.blank? %>
+	<p>
+	  <b>Common name:</b>
+	  <%= @certificate.common_name %>
+	</p>
+<% end %>
+
+<% unless @certificate.organization.blank? %>
+	<p>
+	  <b>Organization:</b>
+	  <%= @certificate.organization %>
+	</p>
+<% end %>
+
+<% unless @certificate.organization_unit.blank? %>
+	<p>
+	  <b>Organization unit:</b>
+	  <%= @certificate.organization_unit %>
+	</p>
+<% end %>
+
+<% unless @certificate.country.blank? %>
+	<p>
+	  <b>Country:</b>
+	  <%= @certificate.country %>
+	</p>
+<% end %>
+
+<% unless @certificate.state.blank? %>
+	<p>
+	  <b>State:</b>
+	  <%= @certificate.state %>
+	</p>
+<% end %>
+
+<p>
+  <b>Days:</b>
+  <%= @certificate.days %>
+</p>
+
+<% unless @certificate.locality.blank? %>
+	<p>
+	  <b>Locality:</b>
+	  <%= @certificate.locality %>
+	</p>
+<% end %>
+
+<p>
+  <b>Email:</b>
+  <%= @certificate.email %>
+</p>
+
+<%= link_to "Edit", edit_certificate_path(@certificate) %> |
+<%= link_to 'Back', certificates_path %>

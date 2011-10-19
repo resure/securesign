@@ -26,5 +26,6 @@
 <%= @key.public_body %>
 </pre>
 
+<%= link_to 'Assigned certificates', key_certificates_path(@key) %> |
 <%= link_to 'Edit', edit_key_path(@key) %> |
 <%= link_to 'Back', keys_path %>

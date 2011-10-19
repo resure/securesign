@@ -11,7 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111016092942) do
+ActiveRecord::Schema.define(:version => 20111019164346) do
+
+  create_table "certificates", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.integer  "certificate_id"
+    t.integer  "key_id"
+    t.text     "body"
+    t.integer  "request_status"
+    t.string   "common_name"
+    t.string   "organization"
+    t.string   "organization_unit"
+    t.string   "country"
+    t.integer  "days"
+    t.string   "locality"
+    t.string   "email"
+    t.string   "state"
+    t.string   "sha"
+    t.integer  "serial"
+    t.boolean  "ca"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "keys", :force => true do |t|
     t.string   "title"

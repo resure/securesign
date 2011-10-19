@@ -54,23 +54,19 @@ class KeysController < ApplicationController
   
   def destroy
     @key = Key.find(params[:id])
-    redirect_to keys_path
     
-    # if !@key.certificates.empty?
-    #   redirect_to @key, alert: 'First you must remove all assigned certificates.'
+    if !@key.certificates.empty?
+      redirect_to @key, alert: 'First you must remove all assigned certificates.'
     # elsif !@key.signs.empty?
-    #   redirect_to @key, alert: 'First you must remove all assigned signs.'
-    # elsif check_permissions
-    #   @key.destroy
-    #   redirect_to keys_url
-    # end
+      # redirect_to @key, alert: 'First you must remove all assigned signs.'
+    else
+      @key.destroy
+      redirect_to keys_url
+    end
   end
 
-  # def certificates
-  #   @key = Key.find(params[:id])
-  #   
-  #   if check_permissions
-  #     @certificates = Certificate.where("key_id = ?", @key.id)
-  #   end
-  # end
+  def certificates
+    @key = Key.find(params[:id])
+    @certificates = Certificate.where("key_id = ?", @key.id)
+  end
 end

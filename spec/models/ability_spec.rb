@@ -2,6 +2,10 @@ require "spec_helper"
 require "cancan/matchers"
 
 describe "Ability" do
+  before(:each) do
+    User.destroy_all
+  end
+  
   describe "as guest" do
     before(:each) do
       @ability = Ability.new(nil)
@@ -32,6 +36,12 @@ describe "Ability" do
       ability.should_not be_able_to(:read, :keys, id: user.id)
       ability.should_not be_able_to(:update, :keys, id: user.id)
       ability.should_not be_able_to(:destroy, :keys, id: user.id)
+      
+      ability.should_not be_able_to(:access, :certificates)
+      ability.should_not be_able_to(:create, :certificates)
+      ability.should_not be_able_to(:read, :certificates, id: user.id)
+      ability.should_not be_able_to(:update, :certificates, id: user.id)
+      ability.should_not be_able_to(:destroy, :certificates, id: user.id)
     end
   end
   
@@ -65,6 +75,9 @@ describe "Ability" do
       ability.should be_able_to(:read, :keys)
       ability.should be_able_to(:update, :keys)
       ability.should be_able_to(:destroy, :keys)
+      ability.should be_able_to(:read, Certificate)
+      ability.should be_able_to(:update, Certificate)
+      ability.should be_able_to(:destroy, Certificate)
     end
   end
 end

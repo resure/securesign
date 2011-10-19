@@ -1,0 +1,65 @@
+<% title 'New certificate' %>
+
+<%= form_for(@certificate) do |f| %>
+  <%= error_messages_for @certificate %>
+
+	<div id="medium-form">
+	  <div class="title-form field">
+	    <%= f.label :title %><br>
+	    <%= f.text_field :title %>
+	  </div>
+
+		<div class="field">
+	    <%= f.label :key_id %><br>
+			<%= select_tag :key_id, options_for_select(@user_keys), style: 'width:187px' %>
+		</div>
+		
+		<div class="field">
+	    <%= f.label :key_password %><br>
+	    <%= f.password_field :key_password %>
+	  </div>
+
+	  <div class="field">
+	    <%= f.label :certificate_id %><br>
+	    <%= f.number_field :certificate_id %>
+	  </div>
+	
+	  <div class="field">
+	    <%= f.label :common_name %><br>
+	    <%= f.text_field :common_name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :email %><br>
+	    <%= f.text_field :email %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :organization %><br>
+	    <%= f.text_field :organization %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :organization_unit %><br>
+	    <%= f.text_field :organization_unit %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :country %><br>
+	    <%= f.text_field :country %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :state %><br>
+	    <%= f.text_field :state %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :days %><br>
+	    <%= f.number_field :days %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :locality %><br>
+	    <%= f.text_field :locality %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit 'Create certificate' %><br>
+	  </div>
+	</div>
+<% end %>
+
+<%= link_to 'Back to the certificates list', certificates_path %>

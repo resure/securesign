@@ -1,0 +1,12 @@
+<% title raw @certificate.title + ' &rarr; Requests' %>
+
+<%= "No requests." if @requests.blank? %>
+
+<% @requests.each do |request| %>
+  <%= link_to request.title, certificate_path(request) %> &mdash;
+	<%= link_to "delete", request, confirm: 'Are you sure?', method: :delete %>
+  <br />
+<% end %>
+
+<br /><br />
+<%= link_to 'Back', @certificate %>

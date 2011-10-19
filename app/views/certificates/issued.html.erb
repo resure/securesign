@@ -1,0 +1,23 @@
+<% title "Certificates issued by #{@certificate.common_name}" %>
+
+<% @issued_certificates.each do |certificate| %>
+  <div class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <div class="left">
+      <strong><%= certificate.title %></strong>
+    </div>
+    <div class="right">
+      <%= link_to 'Show', certificate %>
+      <%= link_to 'Edit', edit_certificate_path(certificate) %>
+      <%= link_to 'Destroy', certificate, confirm: 'Are you sure?', method: :delete %>
+    </div>
+    <div class="clear"></div>
+  </div>
+<% end %>
+
+<% if @issued_certificates.empty? %>
+  No issued certificates.
+<% end %>
+
+<div id="page-tools">
+  <%= link_to 'Back to the certificate', @certificate %>
+</div>

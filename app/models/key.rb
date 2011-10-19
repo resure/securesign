@@ -1,11 +1,14 @@
 class Key < ActiveRecord::Base
-  include DigestMethods  
+  include DigestMethods
   has_secure_password
   
   belongs_to :user
+  has_many :certificates
   
   attr_accessible :title, :password, :password_confirmation, :old_password
   attr_accessor :old_password, :old_password_digest
+  
+  before_destroy :ensure_not_referenced_by_any_object
   
   before_validation :prepare_values, :set_user_id
   
@@ -66,6 +69,7 @@ class Key < ActiveRecord::Base
       end
       
       key_data = `cat #{key_file}`
+      `rm #{key_file}`
       
       attempts += 1
       if attempts > 100
@@ -73,28 +77,35 @@ class Key < ActiveRecord::Base
       end
     end
     
-    attempts = 0
-    public_key_data = ''
-    
-    while public_key_data.blank? do
-      PTY.spawn("openssl rsa -in #{key_file} -pubout > #{public_key_file}") do |reader, writer|
-        reader.expect(/Enter pass/)
-        writer.puts("#{key_password}\n")
+    if key_data != 'OpenSSL error'
+      
+      attempts = 0
+      public_key_data = ''
+      while public_key_data.blank? do
+        `echo '#{key_data}' > #{key_file}`
+        
+        PTY.spawn("openssl rsa -in #{key_file} -pubout > #{public_key_file}") do |reader, writer|
+          reader.expect(/Enter pass/)
+          writer.puts("#{key_password}\n")
+        end
+      
+        public_key_data = `cat #{public_key_file}`
+        `rm #{key_file}`
+        `rm #{public_key_file}`
+      
+        attempts += 1
+        if attempts > 100
+          public_key_data = 'OpenSSL error'
+        end
       end
       
-      public_key_data = `cat #{public_key_file}`
-      
-      attempts += 1
-      if attempts > 100
-        public_key_data = 'OpenSSL error'
-      end
+    else
+      public_key_data = 'OpenSSL error'
     end
-    
-    `rm #{key_file}`
-    `rm #{public_key_file}`
     
     [key_data, public_key_data]
   end
+  
   
   def openssl_update_key_password(old_password, new_password)
     key_file = Rails.root + 'tmp/' + SecureRandom.urlsafe_base64
@@ -105,6 +116,7 @@ class Key < ActiveRecord::Base
     
     require "pty"
     require "expect"
+    
     while new_key_data.blank? do
       `echo '#{self.body}' > #{key_file}`
       
@@ -121,17 +133,18 @@ class Key < ActiveRecord::Base
       
       new_key_data = `cat #{new_key_file}`
       
+      `rm #{key_file}`
+      `rm #{new_key_file}`
+      
       attempts += 1
       if attempts > 100
         new_key_data = 'OpenSSL error'
       end
     end
     
-    `rm #{key_file}`
-    `rm #{new_key_file}`
-    
     new_key_data
   end
+  
   
   def prepare_values
     title.strip!
@@ -139,5 +152,14 @@ class Key < ActiveRecord::Base
   
   def set_user_id
     self.user_id ||= User.first.id
+  end
+  
+  def ensure_not_referenced_by_any_object
+    if certificates.empty?
+      true
+    else
+      errors.add(:base, 'Referenced objects present')
+      false
+    end
   end
 end

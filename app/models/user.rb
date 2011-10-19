@@ -3,6 +3,9 @@
 class User < ActiveRecord::Base
   has_secure_password
   
+  has_many :keys
+  has_many :certificates
+  
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name
   
   validates :email, uniqueness: { case_sensitive: false },
