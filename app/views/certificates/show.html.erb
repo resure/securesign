@@ -9,23 +9,29 @@
 <% if @certificate.certificate_id == 0 %>
 	<div>
 		<strong style='font-style:italic; font-size:11pt'>Root Certificate</strong>
-    <br />
+	</div>
+<% end %>
+
+<% if @certificate.ca? %>
+	<div>
     <%= link_to "Requests list", certificate_requests_path(@certificate) %>
     <%= link_to "Issued certificates", issued_certificates_path(@certificate) %>
 	</div>
-<% else %>
-	<div>
-		<% if @certificate.request_status == 3 %>
-			<em>Issued by <%= link_to @certificate.issued_by.common_name, @certificate.issued_by %></em>
-		<% else %>
-			<em>Waiting approving from <%= link_to @certificate.issued_by.common_name, @certificate.issued_by %></em>
-		<% end %>
-		<br />
-		<% if @certificate.request_status == 2 && @certificate.issued_by.user_id == current_user.id %>
-			<%= link_to "Sign this request", show_request_url(id: @certificate.issued_by.id, request_id: @certificate.id) %> |
-			<%= link_to "Delete this request", @certificate, confirm: 'Are you sure?', method: :delete %>
-		<% end %>
-	</div>
+<% end %>
+
+<% if @certificate.certificate_id != 0 %>
+  <div>
+    <% if @certificate.request_status == 3 %>
+    	<em>Issued by <%= link_to @certificate.issued_by.common_name, @certificate.issued_by %></em>
+    <% else %>
+    	<em>Waiting approving from <%= link_to @certificate.issued_by.common_name, @certificate.issued_by %></em>
+    <% end %>
+    <br />
+    <% if @certificate.request_status == 2 && @certificate.issued_by.user_id == current_user.id %>
+    	<%= link_to "Sign this request", show_request_url(id: @certificate.issued_by.id, request_id: @certificate.id) %> |
+    	<%= link_to "Delete this request", @certificate, confirm: 'Are you sure?', method: :delete %>
+    <% end %>
+  </div>
 <% end %>
 
 <p>
