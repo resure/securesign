@@ -11,3 +11,16 @@ Factory.define :key do |f|
   f.password 'secret'
   f.password_confirmation 'secret'
 end
+
+Factory.define :certificate do |f|
+  f.sequence(:title) { |n| "Test Certificate ##{n}" }
+  f.sequence(:common_name) { |n| "Test Certificate ##{n}" }
+  f.key_password 'secret'
+  f.email 'foo@example.com'
+  f.days 365
+  f.organization 'Test lab'
+  f.organization_unit 'Test lab CA'
+  f.state 'Test state'
+  f.locality 'Test locality'
+  f.country 'Test country'
+end

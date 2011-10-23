@@ -14,11 +14,24 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.mock_with :rspec
-    config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = false
     
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run focus: true
     config.run_all_when_everything_filtered = true
+    
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
     
     config.include AuthMacros
   end

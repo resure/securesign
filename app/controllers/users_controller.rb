@@ -60,9 +60,12 @@ class UsersController < ApplicationController
   
   def destroy
     @user = User.find(params[:id])
-    redirect_to users_path, alert: 'You can\'t delete yourself.' if @user == current_user
-    @user.destroy
-    redirect_to users_path
+    if @user == current_user
+      redirect_to users_path, alert: 'You can\'t delete yourself.'
+    else
+      @user.destroy
+      redirect_to users_path
+    end
   end
 
 end

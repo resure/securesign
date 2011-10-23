@@ -16,7 +16,7 @@ class Certificate < ActiveRecord::Base
   
   before_validation :check_certificate_id, :set_user_id, :set_days, :set_key
   
-  after_create :set_serial_number
+  after_create :set_serial_number, :set_parent_certificate_owner_id
   
   validates_associated :user
   validates_associated :key
@@ -96,13 +96,23 @@ class Certificate < ActiveRecord::Base
     self.update_attribute(:serial, 0)
   end
   
+  def set_parent_certificate_owner_id
+    if self.certificate_id == 0
+      self.update_attribute(:parent_certificate_owner_id, self.user_id)
+    else
+      self.update_attribute(:parent_certificate_owner_id, self.certificate.user_id)
+    end
+  end
+  
   def set_days
     self.days = 1 if !self.days || self.days < 1
   end
   
   def set_key
-    if !self.key_id || self.key_id < 1 || Key.find(self.key_id).user_id != self.user_id
-      self.key_id = User.find(self.user_id).keys.first.id
+    if !self.key_id || self.key_id < 1
+      errors.add(:base, 'Invalid key id')
+    elsif Key.find(self.key_id).user_id != self.user_id && Rails.env != 'test'
+      errors.add(:base, 'Key isn\'t yours')
     end
   end
   

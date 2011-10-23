@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   
   before_validation :prepare_values
   
+  before_destroy :ensure_not_referenced_by_any_object
+  
   def admin?
     admin
   end
@@ -24,7 +26,19 @@ class User < ActiveRecord::Base
     block
   end
   
+  
   private
+  
+  def ensure_not_referenced_by_any_object
+    if !keys.empty?
+      errors.add(:base, 'Referenced keys present')
+      false
+    elsif !certificates.empty?
+      errors.add(:base, 'Referenced certificates present')
+    else
+      true
+    end
+  end
   
   def prepare_values
     email.downcase!

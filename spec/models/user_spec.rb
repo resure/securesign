@@ -18,6 +18,8 @@ describe User do
     user.email.should eq(@attr[:email])
     user.first_name.should eq(@attr[:first_name])
     user.authenticate(@attr[:password]).should be_true
+    user.admin?.should be_false
+    user.blocked?.should be_false
   end
   
   it "should reject with invalid info" do

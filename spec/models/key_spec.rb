@@ -4,7 +4,6 @@ describe Key do
   describe "key creation" do
     before(:each) do
       Factory(:user)
-      Key.destroy_all
       @attr = {
         title: 'Test Key',
         password: 'secret',
@@ -23,8 +22,8 @@ describe Key do
       key.should be_valid
       key.save
       key = Key.find(key.id)
+      key.generate_key(@attr[:password])
       
-      key.generate_key(@attr[:password]).should be_true
       key.title.should eq(@attr[:title])
       key.body.should_not be_blank
       key.public_body.should_not be_blank

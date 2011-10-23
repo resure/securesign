@@ -24,7 +24,6 @@ class KeysController < ApplicationController
     @key.user_id = current_user.id
 
     if @key.save
-      @key.generate_key(@key.password) if Rails.env != 'test'
       redirect_to @key, notice: 
         "Key was successfully created.<br />Remember this password,\
         we will not store it: <strong>#{@key.password}</strong>".html_safe
@@ -65,7 +64,7 @@ class KeysController < ApplicationController
     end
   end
 
-  def certificates
+  def show_certificates
     @key = Key.find(params[:id])
     @certificates = Certificate.where("key_id = ?", @key.id)
   end

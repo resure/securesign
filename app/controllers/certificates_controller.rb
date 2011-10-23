@@ -19,6 +19,7 @@ class CertificatesController < ApplicationController
     load_user_keys
     
     @certificate.certificate_id ||= 0
+    @certificate.user_id = current_user.id
     
     if @certificate.save
       @certificate.generate_certificate(@certificate.key_password)
@@ -55,7 +56,7 @@ class CertificatesController < ApplicationController
     end
   end
   
-  def requests
+  def show_requests
    @certificate = Certificate.find(params[:id])
    @requests = Certificate.where("certificate_id = ?", @certificate.id)
   end
@@ -99,7 +100,7 @@ class CertificatesController < ApplicationController
     @request.destroy
   end
   
-  def issued
+  def show_issued
     @certificate = Certificate.find(params[:id])
     @issued_certificates = Certificate.where("certificate_id = ?", @certificate)
   end

@@ -10,6 +10,10 @@ module AuthMacros
     visit root_url
     @_current_user = user
   end
+  
+  def logout
+    visit logout_path
+  end
 
   def current_user
     @_current_user

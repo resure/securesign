@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20111019164346) do
     t.integer  "user_id"
     t.integer  "certificate_id"
     t.integer  "key_id"
+    t.integer  "parent_certificate_owner_id"
     t.text     "body"
     t.integer  "request_status"
     t.string   "common_name"
