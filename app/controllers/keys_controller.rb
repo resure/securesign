@@ -24,6 +24,7 @@ class KeysController < ApplicationController
     @key.user_id = current_user.id
 
     if @key.save
+      @key.generate_key(@key.password)
       redirect_to @key, notice: 
         "Key was successfully created.<br />Remember this password,\
         we will not store it: <strong>#{@key.password}</strong>".html_safe
