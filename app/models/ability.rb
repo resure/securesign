@@ -8,6 +8,8 @@ class Ability
     if user
       can :logout, User
       can :read, User, id: user.id
+      can :read, Page
+      can :verify, Sign
   
       unless user.blocked?
         can :update, User, id: user.id
@@ -20,6 +22,9 @@ class Ability
         
         can :show_certificates, Key, user_id: user.id
         can [:show_requests, :show_issued], Certificate, user_id: user.id
+        
+        can :create, Page
+        can [:sign, :edit, :update, :destroy], Page, user_id: user.id
       end
       
       if user.admin?

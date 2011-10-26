@@ -41,6 +41,15 @@ describe "Ability" do
       ability.should be_able_to(:destroy, Certificate, user_id: user.id)
       ability.should be_able_to(:show_requests, Certificate, user_id: user.id)
       ability.should be_able_to(:show_issued, Certificate, user_id: user.id)
+      
+      ability.should be_able_to(:read, Page)
+      ability.should be_able_to(:create, Page)
+      ability.should be_able_to(:edit, Page, user_id: user.id)
+      ability.should be_able_to(:sign, Page, user_id: user.id)
+      ability.should be_able_to(:update, Page, user_id: user.id)
+      ability.should be_able_to(:destroy, Page, user_id: user.id)
+      
+      ability.should be_able_to(:verify, Sign)
     end
   end
   
@@ -77,6 +86,10 @@ describe "Ability" do
       ability.should be_able_to(:read, Certificate)
       ability.should be_able_to(:update, Certificate)
       ability.should be_able_to(:destroy, Certificate)
+      
+      ability.should be_able_to(:edit, Page)
+      ability.should be_able_to(:update, Page)
+      ability.should be_able_to(:destroy, Page)
     end
   end
 end

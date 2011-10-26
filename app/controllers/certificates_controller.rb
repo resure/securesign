@@ -48,8 +48,8 @@ class CertificatesController < ApplicationController
     
     if !@certificate.certificates.empty?
       redirect_to @certificate, alert: 'First you must remove all assigned certificates.'
-    # elsif !@certificate.signs.empty?
-      # redirect_to @certificate, alert: 'First you must remove all assigned signs.'
+    elsif !@certificate.signs.empty?
+      redirect_to @certificate, alert: 'First you must remove all assigned signs.'
     else
       @certificate.destroy
       redirect_to certificates_url

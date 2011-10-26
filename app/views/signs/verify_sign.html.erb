@@ -1,0 +1,18 @@
+<% title 'Sign verifying.' %>
+
+Verifying <strong><%= @sign.digest %></strong>.
+
+
+<br /><br />
+
+<h3>
+	<% if @verifying_data[0] == @verifying_data[1] %>
+		Success!
+	<% else %>
+		Fail.
+	<% end %>
+</h3>
+
+<%= @verifying_data[0] %>
+<br />
+<%= @verifying_data[1] %>

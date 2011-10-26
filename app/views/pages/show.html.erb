@@ -6,6 +6,21 @@
   </div>
 <% end %>
 
+<div id="sign">
+	<% if @page.sign %>
+		This page is
+		<%= link_to "signed", verify_sign_path(sha: @page.sign.digest) %>
+		by <%= link_to @page.sign.certificate.common_name, @page.sign.certificate %>
+		<% if @page.sign.certificate.user_id == current_user.id %>
+			<br />
+			<%= link_to "Delete sign", destroy_sign_path(sha: @page.sign.digest) %>
+		<% end %>
+	<% else %>
+		This page isn't signed.<br />
+		<%= link_to 'Sign page', sign_page_path(@page.id) %>
+	<% end %>
+</div>
+
 <p>
 	<strong>Digest:</strong>
 	<input type="text" style="width:275px" value="<%= @page.digest %>" />

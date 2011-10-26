@@ -24,3 +24,8 @@ Factory.define :certificate do |f|
   f.locality 'Test locality'
   f.country 'Test country'
 end
+
+Factory.define :page do |f|
+  f.sequence(:title) { |n| "Test Page ##{n}" }
+  f.sequence(:body) { |n| "Test Page Content ##{n}" }
+end

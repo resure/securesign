@@ -1,7 +1,7 @@
 class Page < ActiveRecord::Base
   include DigestMethods
   
-  # has_one :sign, as: :signable, dependence: :destroy
+  has_one :sign, as: :signable, dependent: :destroy
   
   attr_accessible :title, :body
   

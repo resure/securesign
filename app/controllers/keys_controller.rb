@@ -57,8 +57,8 @@ class KeysController < ApplicationController
     
     if !@key.certificates.empty?
       redirect_to @key, alert: 'First you must remove all assigned certificates.'
-    # elsif !@key.signs.empty?
-      # redirect_to @key, alert: 'First you must remove all assigned signs.'
+    elsif !@key.signs.empty?
+      redirect_to @key, alert: 'First you must remove all assigned signs.'
     else
       @key.destroy
       redirect_to keys_url

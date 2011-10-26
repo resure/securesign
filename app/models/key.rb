@@ -4,6 +4,7 @@ class Key < ActiveRecord::Base
   
   belongs_to :user
   has_many :certificates
+  has_many :signs
   
   attr_accessible :title, :password, :password_confirmation, :old_password
   attr_accessor :old_password, :old_password_digest
@@ -155,7 +156,7 @@ class Key < ActiveRecord::Base
   end
   
   def ensure_not_referenced_by_any_object
-    if certificates.empty?
+    if certificates.empty? && signs.empty?
       true
     else
       errors.add(:base, 'Referenced objects present')

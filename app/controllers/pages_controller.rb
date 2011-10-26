@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @pages = Page.where("user_id = ?", current_user.id)
   end

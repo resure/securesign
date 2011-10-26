@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026055514) do
+ActiveRecord::Schema.define(:version => 20111026071435) do
 
   create_table "certificates", :force => true do |t|
     t.string   "title"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(:version => 20111026055514) do
     t.integer  "user_id"
     t.integer  "sign_id"
     t.string   "sha"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "signs", :force => true do |t|
+    t.integer  "key_id"
+    t.integer  "certificate_id"
+    t.text     "body"
+    t.string   "sha"
+    t.integer  "signable_id"
+    t.string   "signable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

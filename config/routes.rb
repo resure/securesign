@@ -16,6 +16,13 @@ Securesign::Application.routes.draw do
   get 'certificates/:id/sign/:request_id' => 'certificates#show_request', as: :show_request
   post 'certificates/:id/sign/:request_id' => 'certificates#sign_request', as: :sign_request
   get 'certificates/:id/issued' => 'certificates#show_issued', as: :issued_certificates
+  
+  get 'signs/:id' => 'signs#show', as: :sign
+  get 'signPage/:id' => 'signs#signing_page', as: :sign_page
+  post 'signPage/:id' => 'signs#sign_page'
+  
+  get 'verifySign/:sha' => 'signs#verify_sign', as: :verify_sign
+  get 'destroySign/:sha' => 'signs#destroy', as: :destroy_sign
 
   root to: 'info#index'
 end

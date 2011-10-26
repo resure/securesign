@@ -5,7 +5,7 @@ class Certificate < ActiveRecord::Base
   belongs_to :certificate
   belongs_to :key
   has_many :certificates
-  has_many :signs, as: :signable
+  has_many :signs
   
   before_destroy :ensure_not_referenced_by_any_object
   
@@ -217,7 +217,7 @@ class Certificate < ActiveRecord::Base
   end
   
   def ensure_not_referenced_by_any_object
-    if certificates.empty? # && signs.empty?
+    if certificates.empty? && signs.empty?
       true
     else
       errors.add(:base, 'Referenced objects present')
