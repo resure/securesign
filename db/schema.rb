@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026071435) do
+ActiveRecord::Schema.define(:version => 20111026181324) do
 
   create_table "certificates", :force => true do |t|
     t.string   "title"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20111026071435) do
     t.string   "sha"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file"
+    t.string   "file_sha"
   end
 
   create_table "signs", :force => true do |t|

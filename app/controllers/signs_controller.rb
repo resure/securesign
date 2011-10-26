@@ -29,6 +29,7 @@ class SignsController < ApplicationController
   def verify_sign
     begin
       @sign = Sign.find_by_sha(params[:sha])
+      @sign.signable.generate_digest
       authorize! :verify, @sign
     rescue ActiveRecord::RecordNotFound
       redirect_to root_url, alert: 'Sign not found.'

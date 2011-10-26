@@ -1,6 +1,6 @@
 <% title 'Pages > ' + @page.title %>
 
-<% if @page.user_id != current_user.id %>
+<% if @page.user_id != current_user.id && current_user.admin? %>
   <div>
     <strong>WARNING: this page isn't yours.</strong>
   </div>
@@ -13,7 +13,7 @@
 		by <%= link_to @page.sign.certificate.common_name, @page.sign.certificate %>
 		<% if @page.sign.certificate.user_id == current_user.id %>
 			<br />
-			<%= link_to "Delete sign", destroy_sign_path(sha: @page.sign.digest) %>
+			<%= link_to "Delete sign", destroy_sign_path(sha: @page.sign.digest), confirm: 'Are you sure?', class: 'danger-link' %>
 		<% end %>
 	<% else %>
 		This page isn't signed.<br />
@@ -21,9 +21,14 @@
 	<% end %>
 </div>
 
-<p>
+<p style='text-align: right'>
 	<strong>Digest:</strong>
-	<input type="text" style="width:275px" value="<%= @page.digest %>" />
+	<input type="text" style="width:275px" value="<%= @page.sha %>" /><br>
+	<% unless @page.file.to_s.blank? %>
+  	<strong>Attached file digest:</strong>
+  	<input type="text" style="width:275px" value="<%= @page.file_sha %>" /><br>
+  	<%= link_to 'Download attached file', @page.file_url %>
+	<% end %>
 </p>
 
 <div>

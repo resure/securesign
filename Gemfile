@@ -8,6 +8,7 @@ gem 'awesome_print'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'cancan'
 gem 'redcarpet'
+gem 'carrierwave'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
