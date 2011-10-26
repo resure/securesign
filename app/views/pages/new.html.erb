@@ -1,0 +1,19 @@
+<% title 'New Page' %>
+
+<%= form_for(@page) do |f| %>
+  <%= error_messages_for @page %>
+
+  <div class="field text-title">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field text-field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Create page' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', pages_path %>

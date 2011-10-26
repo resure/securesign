@@ -3,6 +3,7 @@ Securesign::Application.routes.draw do
   resources :sessions
   resources :keys
   resources :certificates
+  resources :pages
   
   get 'logout' => 'sessions#destroy', as: 'logout'
   get 'login' => 'sessions#new', as: 'login'

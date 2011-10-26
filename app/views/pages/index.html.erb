@@ -1,0 +1,19 @@
+<% title 'Listing your pages' %>
+
+<% @pages.each do |page| %>
+  <div class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <div class="left">
+      <strong><%= page.title %></strong>
+    </div>
+    <div class="right">
+      <%= link_to 'Show', page %>
+      <%= link_to 'Edit', edit_page_path(page) %>
+      <%= link_to 'Destroy', page, confirm: 'Are you sure?', method: :delete %>
+    </div>
+    <div class="clear"></div>
+  </div>
+<% end %>
+
+<div id="page-tools">
+  <%= link_to 'New Page', new_page_path %>
+</div>

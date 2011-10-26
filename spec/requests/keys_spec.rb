@@ -16,7 +16,6 @@ describe "Keys" do
   describe "keys creation" do 
     it "should create new key" do
       login @user
-      
       visit new_key_path
       fill_in "Title", with: @attr[:title]
       fill_in "Password", with: @attr[:password]
@@ -24,8 +23,8 @@ describe "Keys" do
       click_button "Generate key"
       page.should have_content("Key was successfully created.")
       page.should have_content("Remember this password, we will not store it: #{@attr[:password]}")      
-      page.should have_content(Key.last.body)
-      page.should have_content(Key.last.public_body)
+      page.should have_content('-----BEGIN RSA PRIVATE KEY-----')
+      page.should have_content('-----BEGIN PUBLIC KEY-----')
     end
   end
   

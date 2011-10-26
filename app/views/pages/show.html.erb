@@ -1,0 +1,20 @@
+<% title 'Pages > ' + @page.title %>
+
+<% if @page.user_id != current_user.id %>
+  <div>
+    <strong>WARNING: this page isn't yours.</strong>
+  </div>
+<% end %>
+
+<p>
+	<strong>Digest:</strong>
+	<input type="text" style="width:275px" value="<%= @page.digest %>" />
+</p>
+
+<div>
+  <%= markdown @page.body %>
+</div>
+
+
+<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Back', pages_path %>
