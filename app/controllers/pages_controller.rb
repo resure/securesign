@@ -14,7 +14,7 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page].merge(user_id: current_user.id))
+    @page = current_user.pages.new params[:page]
 
     if @page.save
       redirect_to @page, notice: 'Page was successfully created.'

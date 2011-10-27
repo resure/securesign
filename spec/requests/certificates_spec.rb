@@ -43,7 +43,7 @@ describe "Certificates" do
       fill_in 'Email', with: @root_attr[:email]
       fill_in 'Organization', with: @root_attr[:organization]
       fill_in 'Organization unit', with: @root_attr[:organization_unit]
-      fill_in 'Country', with: @root_attr[:country]
+      select 'Russia', from: 'Country'
       fill_in 'State', with: @root_attr[:state]
       fill_in 'Days', with: @root_attr[:days]
       fill_in 'Locality', with: @root_attr[:locality]
@@ -73,7 +73,7 @@ describe "Certificates" do
       fill_in 'Email', with: @ca_attr[:email]
       fill_in 'Organization', with: @ca_attr[:organization]
       fill_in 'Organization unit', with: @ca_attr[:organization_unit]
-      fill_in 'Country', with: @ca_attr[:country]
+      select 'Russia', from: 'Country'
       fill_in 'State', with: @ca_attr[:state]
       fill_in 'Days', with: @ca_attr[:days]
       fill_in 'Locality', with: @ca_attr[:locality]

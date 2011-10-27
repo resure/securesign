@@ -10,7 +10,7 @@ describe Sign do
   end
   
   it "should create valid sign" do
-    page = Factory(:page)
+    page = Factory(:page, user_id: @user.id)
     sign = Sign.new(key_id: @key.id, certificate_id: @certificate.id)
     sign.signable = page
     sign.should be_valid

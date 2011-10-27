@@ -7,7 +7,6 @@ class Page < ActiveRecord::Base
   
   validates :user_id, presence: true, numericality: { only_integer: true, minimum: 1 }
   
-  before_validation :set_user_id
   after_validation :generate_digest
   
   def generate_digest
@@ -21,14 +20,5 @@ class Page < ActiveRecord::Base
   
   def digest
     Digest::SHA1.hexdigest("#{self.sha}|#{self.file_sha}")
-  end
-  
-  
-  private
-  
-  def set_user_id
-    if self.user_id == 0 || self.user_id.blank?
-      self.user_id = User.first.id
-    end
   end
 end
