@@ -22,7 +22,7 @@ Factory.define :certificate do |f|
   f.organization_unit 'Test lab CA'
   f.state 'Test state'
   f.locality 'Test locality'
-  f.country 'Test country'
+  f.country 'RU'
 end
 
 Factory.define :page do |f|
