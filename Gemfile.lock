@@ -42,6 +42,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    carmen (0.2.8)
     carrierwave (0.5.7)
       activesupport (~> 3.0)
     childprocess (0.2.2)
@@ -131,6 +132,8 @@ GEM
       railties (~> 3.0)
       rspec (~> 2.6.0)
     rubyzip (0.9.4)
+    russian (0.6.0)
+      i18n (>= 0.5.0)
     sass (3.1.10)
     sass-rails (3.1.4)
       actionpack (~> 3.1.0)
@@ -168,6 +171,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   cancan
   capybara
+  carmen
   carrierwave
   coffee-rails (~> 3.1.1)
   database_cleaner
@@ -181,6 +185,7 @@ DEPENDENCIES
   rails (= 3.1.1)
   redcarpet
   rspec-rails
+  russian (~> 0.6.0)
   sass-rails (~> 3.1.4)
   spork (> 0.9.0.rc)
   uglifier (>= 1.0.3)

@@ -9,6 +9,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'cancan'
 gem 'redcarpet'
 gem 'carrierwave'
+gem 'russian', '~> 0.6.0'
+gem 'carmen'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'

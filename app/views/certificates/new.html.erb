@@ -42,7 +42,7 @@
 	  </div>
 	  <div class="field">
 	    <%= f.label :country %><br>
-	    <%= f.text_field :country %>
+      <%= f.select :country, options_for_select(Carmen.countries) %>
 	  </div>
 	  <div class="field">
 	    <%= f.label :state %><br>
