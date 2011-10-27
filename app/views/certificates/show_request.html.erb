@@ -60,7 +60,7 @@
   <div id="medium-form">
 	  <div class='grey-box'>
 	    Key password:
-	    <%= password_field_tag :key_password %><br />
+	    <%= password_field_tag :key_password, autofocus: true %><br />
 			Create CA: <%= check_box_tag :create_ca %>
 	    <%= submit_tag 'Sign', class: 'primary button' %>
 	  </div>
