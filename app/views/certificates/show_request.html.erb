@@ -1,7 +1,7 @@
 <% title "Signing '#{@request.title}' by '#{@certificate.title}'" %>
 
 <p>
-	<pre><%= @request.body %></pre>
+<textarea readonly cols="89" rows="20"><%= @request.body %></textarea>
 </p>
 
 <% unless @request.common_name.blank? %>

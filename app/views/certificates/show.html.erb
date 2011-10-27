@@ -51,7 +51,7 @@
 </p>
 
 <p>
-	<pre><%= @certificate.body %></pre>
+  <textarea readonly cols="90" rows="35"><%= @certificate.body %></textarea>
 </p>
 
 <% unless @certificate.common_name.blank? %>
