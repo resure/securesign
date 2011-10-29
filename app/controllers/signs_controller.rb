@@ -18,6 +18,8 @@ class SignsController < ApplicationController
 
     if !@sign.key.authenticate(params[:key_password])
       redirect_to @page, alert: 'Wrong key password.'
+    elsif @sign.certificate.request_status == 2
+      redirect_to @page, alert: 'Certificate was not signed.'
     elsif @sign.save
       @sign.sign(params[:key_password])
       redirect_to @page, notice: 'Successfully signed.'

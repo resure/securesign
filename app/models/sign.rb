@@ -6,13 +6,17 @@ class Sign < ActiveRecord::Base
   belongs_to :certificate
   
   def sign(key_password)
-    if key.authenticate(key_password)
+    if !key.authenticate(key_password)
+      errors.add(:base, 'Wrong key password')
+      false
+    elsif certificate.request_status == 2
+      errors.add(:base, 'Certificate was not signed')
+      false
+    else
       sign_data = openssl_sign(key_password)
       update_attribute(:body, sign_data)
       generate_digest
       true
-    else
-      errors.add(:base, 'Wrong key password')
     end
   end
   

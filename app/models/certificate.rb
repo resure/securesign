@@ -21,7 +21,7 @@ class Certificate < ActiveRecord::Base
   validates_associated :user
   validates_associated :key
   
-  validates :title, length: { within: 3..254 }
+  validates :title, :common_name, length: { within: 3..254 }
   validates :country, length: { maximum: 2 }
   validates :user_id, :key_id, :days, presence: true, numericality: { only_integer: true, minimum: 1 }
   validates :certificate_id, presence: true, numericality: { only_integer: true, minimum: 0 }
