@@ -68,7 +68,7 @@ describe "Certificates" do
       fill_in 'Title', with: @ca_attr[:title]
       fill_in 'Key password', with: @key.password
       select @key.title, from: 'key_id'
-      fill_in 'Certificate', with: @root_certificate.id
+      select @root_certificate.title, from: 'certificate_id'
       fill_in 'Common name', with: @ca_attr[:common_name]
       fill_in 'Email', with: @ca_attr[:email]
       fill_in 'Organization', with: @ca_attr[:organization]
