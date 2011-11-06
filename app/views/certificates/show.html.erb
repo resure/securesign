@@ -12,13 +12,6 @@
 	</div>
 <% end %>
 
-<% if @certificate.ca? %>
-	<div>
-    <%= link_to "Requests list", certificate_requests_path(@certificate) %>
-    <%= link_to "Issued certificates", issued_certificates_path(@certificate) %>
-	</div>
-<% end %>
-
 <% if @certificate.certificate_id != 0 %>
   <div>
     <% if @certificate.request_status == 3 %>
@@ -34,9 +27,18 @@
   </div>
 <% end %>
 
-<p>
-	<%= "<strong>CA certificate</strong>".html_safe if @certificate.ca? %>
-</p>
+<% if @certificate.ca? %>
+  <div>
+    <%= "<strong>CA certificate</strong>".html_safe if @certificate.ca? %>
+    <br>
+    <%= link_to "Requests list", certificate_requests_path(@certificate) %>
+    <%= link_to "Issued certificates", issued_certificates_path(@certificate) %>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to 'Signs by this certificate', show_signs_path(@certificate) %>
+</div>
 
 <% if @certificate.user_id == current_user.id %>
 	<p>

@@ -1,0 +1,23 @@
+<% title "Signs by #{@certificate.common_name}" %>
+
+<% @signs.each do |sign| -%>
+  <div class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <div class="left">
+      <strong><%= sign.signable.title %></strong>
+    </div>
+    <div class="right">
+      <%= link_to 'Show', verify_sign_path(sign.sha) %>
+      <%= link_to 'Destroy', destroy_sign_path(sign.sha), confirm: 'Are you sure?' %>
+    </div>
+    <div class="clear">
+    </div>
+  </div>
+<% end -%>
+
+<% if @signs.empty? -%>
+  No signs by this certificate.
+<% end -%>
+
+<div id="page-tools">
+  <%= link_to 'Back to the certificate', @certificate %>
+</div>

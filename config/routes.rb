@@ -16,6 +16,7 @@ Securesign::Application.routes.draw do
   get 'certificates/:id/sign/:request_id' => 'certificates#show_request', as: :show_request
   post 'certificates/:id/sign/:request_id' => 'certificates#sign_request', as: :sign_request
   get 'certificates/:id/issued' => 'certificates#show_issued', as: :issued_certificates
+  get 'certificates/:id/signs' => 'certificates#show_signs', as: :show_signs
   
   get 'signs/:id' => 'signs#show', as: :sign
   get 'signPage/:id' => 'signs#signing_page', as: :sign_page

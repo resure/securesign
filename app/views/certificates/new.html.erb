@@ -21,7 +21,7 @@
 
 	  <div class="field">
 	    <%= f.label :certificate_id %><br>
-	    <%= f.number_field :certificate_id %>
+      <%= select_tag :certificate_id, options_for_select(@certificates), style: 'width:187px' %>
 	  </div>
 	
 	  <div class="field">

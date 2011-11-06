@@ -11,11 +11,12 @@ class CertificatesController < ApplicationController
   
   def new
     @certificate = Certificate.new
+    load_certificates
     load_user_keys
   end
   
   def create
-    @certificate = Certificate.new(params[:certificate].merge(key_id: params[:key_id], user_id: current_user.id))
+    @certificate = Certificate.new(params[:certificate].merge(key_id: params[:key_id], user_id: current_user.id, certificate_id: params[:certificate_id]))
     load_user_keys
     
     @certificate.certificate_id ||= 0
@@ -102,7 +103,12 @@ class CertificatesController < ApplicationController
   
   def show_issued
     @certificate = Certificate.find(params[:id])
-    @issued_certificates = Certificate.where("certificate_id = ?", @certificate)
+    @issued_certificates = Certificate.where("certificate_id = ?", @certificate.id)
+  end
+
+  def show_signs
+    @certificate = Certificate.find(params[:id])
+    @signs = Sign.where("certificate_id =?", @certificate.id)
   end
   
   
@@ -113,6 +119,14 @@ class CertificatesController < ApplicationController
     
     Key.where("user_id = ?", current_user.id).each do |key|
       @user_keys << [key[:title], key[:id]]
+    end
+  end
+
+  def load_certificates
+    @certificates = [["Selfsigned certificate", 0]]
+    
+    Certificate.where("ca = ?", true).each do |certificate|
+      @certificates << ["#{certificate[:common_name]} (#{certificate.user.first_name} #{certificate.user.last_name})", certificate[:id]]
     end
   end
 end

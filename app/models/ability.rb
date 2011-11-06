@@ -21,7 +21,7 @@ class Ability
         can [:update, :destroy], Certificate, user_id: user.id
         
         can :show_certificates, Key, user_id: user.id
-        can [:show_requests, :show_issued], Certificate, user_id: user.id
+        can [:show_signs, :show_requests, :show_issued], Certificate, user_id: user.id
         
         can :create, Page
         can [:sign, :edit, :update, :destroy], Page, user_id: user.id
