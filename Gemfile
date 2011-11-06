@@ -32,4 +32,9 @@ end
 
 group :development do
   gem 'launchy'
+  gem 'foreman'
+end
+
+group :production do
+  gem 'thin' # For heroku
 end
