@@ -25,9 +25,9 @@ class KeysController < ApplicationController
 
     if @key.save
       @key.generate_key(@key.password)
-      redirect_to @key, notice: 
-        "Key was successfully created.<br />Remember this password,\
-        we will not store it: <strong>#{@key.password}</strong>".html_safe
+      redirect_to @key, notice: 'Key was successfully created.' 
+        # "Key was successfully created.<br />Remember this password,\
+        # we will not store it: <strong>#{@key.password}</strong>".html_safe
     else
       render action: 'new'
     end
@@ -43,9 +43,8 @@ class KeysController < ApplicationController
       notice = ''
       if !params[:key][:password].blank?
         @key.update_password(params[:key][:old_password], params[:key][:password])
-        notice = "Remember the password, we will not store it: <strong>#{params[:key][:password]}</strong>"
       end
-      redirect_to @key, notice: "Key was successfully updated. #{notice}".html_safe
+      redirect_to @key, notice: "Key was successfully updated."
     else
       render action: 'edit'
     end
