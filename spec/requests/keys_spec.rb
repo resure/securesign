@@ -22,7 +22,6 @@ describe "Keys" do
       fill_in "Password confirmation", with: @attr[:password_confirmation]
       click_button "Generate key"
       page.should have_content("Key was successfully created.")
-      page.should have_content("Remember this password, we will not store it: #{@attr[:password]}")      
       page.should have_content('-----BEGIN RSA PRIVATE KEY-----')
       page.should have_content('-----BEGIN PUBLIC KEY-----')
     end
@@ -53,7 +52,7 @@ describe "Keys" do
       fill_in "Old password", with: @attr[:password]
       click_button "Update key"
       page.should have_content("New super title")
-      page.should have_content("Key was successfully updated. Remember the password, we will not store it: qwerty")
+      page.should have_content("Key was successfully updated.")
       
       click_link "Edit"
       fill_in "Password", with: @attr[:password]
@@ -62,7 +61,7 @@ describe "Keys" do
       fill_in "Title", with: @attr[:title]
       click_button "Update key"
       page.should have_content(@attr[:title])
-      page.should have_content("Key was successfully updated. Remember the password, we will not store it: #{@attr[:password]}")
+      page.should have_content("Key was successfully updated.")
     end
   end
 end
